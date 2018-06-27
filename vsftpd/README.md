@@ -44,7 +44,7 @@ This image uses environment variables to allow the configuration of some paramet
 
 ----
 
-* Variable name: LOG_STDOUT
+* Variable name: `LOG_STDOUT`
 * Default value: null.
 * Accepted values: Any string to enable, empty string or not defined to disable.
 * Description: Output vsftpd log through STDOUT, so that it can be accessed through the [container logs](https://docs.docker.com/reference/commandline/logs/).
@@ -70,7 +70,10 @@ Use cases
 2) Create a container in active mode using the default user account, with a binded data directory:
 
 ```bash
-docker run -d -p 21:21 -v /my/data/directory:/home/vsftpd -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt --name vsftpd zhangguanzhang/vsftpd
+$ cat virtual_users.txt 
+myuser
+mypass
+$ docker run -d -p 21:21 -v /my/data/directory:/home/vsftpd -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt --name vsftpd zhangguanzhang/vsftpd
 # see logs for credentials:
 docker logs vsftpd
 ```
@@ -78,7 +81,10 @@ docker logs vsftpd
 3) Create a **production container** with a custom user account, binding a data directory and enabling both active and passive mode:
 
 ```bash
-docker run -d -v /my/data/directory:/home/vsftpd \
+$ cat virtual_users.txt 
+myuser
+mypass
+$ docker run -d -v /my/data/directory:/home/vsftpd \
 -p 20-21:20-21 -p 21100-21110:21100-21110 \
 -e PASV_ADDRESS=127.0.0.1 -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt \
 --name vsftpd --restart=always zhangguanzhang/vsftpd
@@ -86,6 +92,7 @@ docker run -d -v /my/data/directory:/home/vsftpd \
 
 4) Manually add a new FTP user to an existing container:
 ```bash
+
 docker exec -i -t vsftpd bash
 mkdir /home/vsftpd/myuser
 echo -e "myuser\nmypass" >> /etc/vsftpd/virtual_users.txt
