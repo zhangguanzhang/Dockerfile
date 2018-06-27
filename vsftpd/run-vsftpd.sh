@@ -26,8 +26,8 @@ cat << EOB
 
     SERVER SETTINGS
     ---------------
-    · FTP User: $FTP_USER
-    · FTP Password: $FTP_PASS
+    · FTP pasv_max_port: $PASV_MAX_PORT
+    · FTP pasv_min_port: $PASV_MIN_PORT
     · Log file: $LOG_FILE
 EOB
 else
