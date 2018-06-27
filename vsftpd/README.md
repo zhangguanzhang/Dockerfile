@@ -64,10 +64,32 @@ Use cases
 1) Create a temporary container for testing purposes and the default config_file:
 
 ```bash
-  docker run --rm -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt zhangguanzhang/vsftpd
-```
-```bash
-  docker run --rm zhangguanzhang/vsftpd grep -Pv '^$|^#' /etc/vsftpd/vsftpd.conf
+$  docker run --rm -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt zhangguanzhang/vsftpd
+
+$  docker run --rm zhangguanzhang/vsftpd grep -Pv '^$|^#' /etc/vsftpd/vsftpd.conf
+background=NO
+anonymous_enable=NO
+local_enable=YES
+guest_enable=YES
+virtual_use_local_privs=YES
+write_enable=YES
+pam_service_name=vsftpd_virtual
+user_sub_token=$USER
+local_root=/home/vsftpd/$USER
+chroot_local_user=YES
+allow_writeable_chroot=YES
+hide_ids=YES
+pasv_addr_resolve=NO
+xferlog_enable=YES
+xferlog_file=/var/log/vsftpd/vsftpd.log
+port_enable=YES
+connect_from_port_20=YES
+ftp_data_port=20
+seccomp_sandbox=NO
+pasv_enable=YES
+pasv_address=127.0.0.1
+pasv_max_port=21110
+pasv_min_port=21100
 ```
 
 2) Create a container in active mode using the default user account, with a binded data directory:
@@ -89,7 +111,9 @@ myuser
 mypass
 $ docker run -d -v /my/data/directory:/home/vsftpd \
 -p 20-21:20-21 -p 21100-21110:21100-21110 \
--e PASV_ADDRESS=127.0.0.1 -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt \
+-e PASV_ADDRESS=127.0.0.1 \
+-v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt \
+-v $PWD/vsftpd.conf:/etc/vsftpd/vsftpd.conf \
 --name vsftpd --restart=always zhangguanzhang/vsftpd
 ```
 
