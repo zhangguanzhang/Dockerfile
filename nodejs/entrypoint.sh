@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+[[ "${DEBUG}" == "true" ]] && set -x
 function package_check(){
     [ ! -f '/home/node/package.json' ] \
         && { ehco 'package.json not exist!';exit 6; }
