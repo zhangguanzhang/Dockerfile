@@ -61,10 +61,13 @@ When sharing a homes directory between the host and the container (`/home/vsftpd
 Use cases
 ----
 
-1) Create a temporary container for testing purposes:
+1) Create a temporary container for testing purposes and the default config_file:
 
 ```bash
   docker run --rm -v $PWD/virtual_users.txt:/etc/vsftpd/virtual_users.txt zhangguanzhang/vsftpd
+```
+```bash
+  docker run --rm zhangguanzhang/vsftpd grep -Pv '^$|^#' /etc/vsftpd/vsftpd.conf
 ```
 
 2) Create a container in active mode using the default user account, with a binded data directory:
