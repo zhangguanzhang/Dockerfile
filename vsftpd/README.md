@@ -92,7 +92,7 @@ pasv_max_port=21110
 pasv_min_port=21100
 ```
 
-2) Create a container in active mode using the default user account, with a binded data directory:
+2) Create a container in active mode using your own user account, with a binded data directory:
 
 ```bash
 $ cat virtual_users.txt 
