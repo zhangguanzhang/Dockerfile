@@ -3,7 +3,8 @@ RUN apk add --no-cache build-base && \
     gem install travis && \
     gem install travis-lint && \
     apk del build-base && \
-    apk add --no-cache git
+    apk add --no-cache git && \
+    rm -f /var/cache/apk/* /tmp/*
 WORKDIR project
 #VOLUME ["/project"]
 ENTRYPOINT ["travis"]
