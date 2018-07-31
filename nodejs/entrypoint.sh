@@ -18,7 +18,7 @@ function node_base_run(){
     exec "$@"
 }
 
-[ "$1" = 'node' -a "$#" -gt 1 ] && node_base_run
+[ "$1" = 'node' -a "$#" -gt 1 ] && exec node
 # edit your's  run style
 [ "$*" = 'npm run start' ] && node_base_run
 #----------------------
