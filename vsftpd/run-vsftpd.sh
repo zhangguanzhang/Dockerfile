@@ -39,4 +39,4 @@ else
 fi
 
 # Run vsftpd:
-/usr/sbin/vsftpd $VSFTPD_CONF
+exec "/usr/sbin/vsftpd $VSFTPD_CONF"
