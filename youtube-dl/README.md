@@ -9,3 +9,7 @@ docker run  --rm \
     --convert-subtitles srt \
     -f bestvideo+bestaudio  https://www.youtube.com/watch?v=DP0t2MmOMEA
 ```
+取最后一个视频的url_id
+```bash
+curl -s https://www.youtube.com/channel/UCAL3JXZSzSm8AlZyD3nQdBA/videos | grep -Pom1 'yt-lockup-title.+?href="/watch\?v=\K[^"]+'
+```
