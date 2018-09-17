@@ -13,3 +13,11 @@ docker run  --rm \
 ```bash
 curl -s https://www.youtube.com/channel/UCAL3JXZSzSm8AlZyD3nQdBA/videos | grep -Pom1 'yt-lockup-title.+?href="/watch\?v=\K[^"]+'
 ```
+
+```bash
+function getInfo(){
+    curl -s https://www.youtube.com/watch?v=$@ |
+        grep -Po '\Qhttps://youtube.com/playlist?list=PLG...</a><br /><br />\E\K.+?(?=</p></div>  <div id="watch-description)' |
+        sed -r 's#<a.+?href="([^"]+).+?...</a>#https://www.youtube.com\1#;s#<br />#\n#g'
+}
+```
