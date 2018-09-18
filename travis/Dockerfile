@@ -1,5 +1,5 @@
 FROM ruby:alpine
-RUN apk add --no-cache build-base && \
+RUN apk add --no-cache build-base ca-certificates && \
     gem install travis && \
     gem install travis-lint && \
     apk del build-base && \
