@@ -35,7 +35,7 @@ cat << EOB
     · Log file: $LOG_FILE
 EOB
 else
-    /usr/bin/ln -sf /dev/stdout $LOG_FILE
+    /usr/bin/ln -sf /dev/stdout /var/log/vsftpd.log
 fi
 
 # Run vsftpd:
