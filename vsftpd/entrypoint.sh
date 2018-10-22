@@ -17,9 +17,9 @@ sed -ri '/^pasv_max_port=/s#=.+#='"$PASV_MAX_PORT"'#' $VSFTPD_CONF
 sed -ri '/^pasv_min_port=/s#=.+#='"$PASV_MIN_PORT"'#' $VSFTPD_CONF
 
 # stdout server info:
+export LOG_FILE=`grep -Po '(?<=^xferlog_file=).+' $VSFTPD_CONF`
 if [ "$LOG_STDOUT" == false ]; then
 # Get log file path
-export LOG_FILE=`grep -Po '(?<=^xferlog_file=).+' $VSFTPD_CONF`
 cat << EOB
     *************************************************************
     *                                                           *
@@ -35,7 +35,8 @@ cat << EOB
     · Log file: $LOG_FILE
 EOB
 else
-    /usr/bin/ln -sf /dev/stdout /var/log/vsftpd.log
+   mkdir -p /var/log/vsftpd
+   /usr/bin/ln -sf /dev/stdout $LOG_FILE
 fi
 
 # Run vsftpd:
