@@ -32,8 +32,7 @@ RUN set -x \
         --delete               "Server/Service/Engine/Host/Context/@debug" \
                                "${CONF_INSTALL}/conf/server.xml" \
     && touch -d "@0"           "${CONF_INSTALL}/conf/server.xml" \
-    && chown daemon:daemon     "${JAVA_CACERTS}" \
-    && rm -f ${CONF_INSTALL}/confluence/WEB-INF/lib/atlassian-extras*
+    && chown daemon:daemon     "${JAVA_CACERTS}"
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
@@ -52,7 +51,7 @@ VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
 WORKDIR /var/atlassian/confluence
 
 COPY docker-entrypoint.sh /
-COPY atlassian-extras-3.2.jar ${CONF_INSTALL}/confluence/WEB-INF/lib/
+COPY atlassian-extras-3.2.jar ${CONF_INSTALL}/confluence/WEB-INF/lib/atlassian-extras-decoder-api-3.4.1.jar
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Run Atlassian Confluence as a foreground process by default.
