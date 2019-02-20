@@ -6,7 +6,7 @@ ENV CONF_HOME=/var/atlassian/confluence \
     JAVA_CACERTS=$JAVA_HOME/jre/lib/security/cacerts \
     CERTIFICATE=$CONF_HOME/certificate \
     MYSQL_connector=5.1.47 \
-    CONF_VERSION=6.14.1
+    CONF_VERSION=6.14.1 JAVA_OPTS='-Duser.timezone=GMT+08'
 
 # Install Atlassian Confluence and helper tools and setup initial home
 # directory structure.

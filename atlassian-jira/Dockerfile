@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 # Configuration variables. https://dev.mysql.com/downloads/connector/j/5.1.html  https://jdbc.postgresql.org/download.html
 ENV JIRA_HOME=/var/atlassian/jira JIRA_INSTALL=/opt/atlassian/jira MYSQL_connector=5.1.47 PG_JDBC=42.2.5
-ENV JIRA_VERSION=8.0.0 JIRA_TYPE=software
+ENV JIRA_VERSION=8.0.0 JIRA_TYPE=software JAVA_OPTS='-Duser.timezone=GMT+08'
 
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
