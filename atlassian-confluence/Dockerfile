@@ -51,7 +51,7 @@ VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
 WORKDIR /var/atlassian/confluence
 
 COPY docker-entrypoint.sh /
-COPY atlassian-extras-3.2.jar ${CONF_INSTALL}/confluence/WEB-INF/lib/atlassian-extras-decoder-api-3.4.1.jar
+COPY atlassian-extras-3.4.1.jar  ${CONF_INSTALL}/confluence/WEB-INF/lib/atlassian-extras-decoder-api-3.4.1.jar
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Run Atlassian Confluence as a foreground process by default.
