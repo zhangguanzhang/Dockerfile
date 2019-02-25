@@ -39,9 +39,11 @@ volumes:
 
 
 然后用命令生成注册码填进去即可
-![5](https://github.com/zhangguanzhang/Image-Hosting/blob/master/atlassian/5.png?raw=true)
+`docker exec confluence atlassianctl license -s <id>`
 设置完后admin登陆进去后在在右上角的齿轮小图标里一般设置左侧栏里往下翻到授权细节查看如下图所示:
+
 ![6](https://github.com/zhangguanzhang/Image-Hosting/blob/master/atlassian/6.png?raw=true)
+
 和jira一样修改数据库连接参数,文件路径为`/var/lib/docker/volumes/confluence_CONF_HOME_data/_data/confluence.cfg.xml`
 
 `jdbc:mysql://10.20.4.17:3306/confluence`改为`jdbc:mysql://10.20.4.17:3306/confluence?useSSL=false`改完后重启下容器即可
