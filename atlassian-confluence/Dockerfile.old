@@ -10,8 +10,6 @@ ENV CONF_HOME=/var/atlassian/confluence \
 
 # Install Atlassian Confluence and helper tools and setup initial home
 # directory structure.
-COPY atlassianctl_linux_amd64 /usr/local/bin/atlassianctl
-
 RUN set -x \
     && apk --no-cache add curl xmlstarlet bash ttf-dejavu libc6-compat \
     && mkdir -p                "${CONF_HOME}" \
@@ -34,10 +32,7 @@ RUN set -x \
         --delete               "Server/Service/Engine/Host/Context/@debug" \
                                "${CONF_INSTALL}/conf/server.xml" \
     && touch -d "@0"           "${CONF_INSTALL}/conf/server.xml" \
-    && chown daemon:daemon     "${JAVA_CACERTS}" \
-    && cd ${CONF_INSTALL}/confluence/WEB-INF/lib/ \
-    && chmod a+x /usr/local/bin/atlassianctl \
-    && atlassianctl crack atlassian-extras-decoder-v*.jar
+    && chown daemon:daemon     "${JAVA_CACERTS}"
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
@@ -56,6 +51,7 @@ VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
 WORKDIR /var/atlassian/confluence
 
 COPY docker-entrypoint.sh /
+COPY atlassian-extras-3.4.1.jar  ${CONF_INSTALL}/confluence/WEB-INF/lib/atlassian-extras-decoder-api-3.4.1.jar
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Run Atlassian Confluence as a foreground process by default.
