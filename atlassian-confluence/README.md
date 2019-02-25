@@ -4,7 +4,8 @@ https://hub.docker.com/r/cptactionhank/atlassian-confluence/dockerfile
 改的上面这个镜像,相关问就在我github上 https://github.com/zhangguanzhang/Dockerfile/blob/master/atlassian-confluence
 大致和jira一样,破解在网上搜到了两种方式
 1. 是市面上替换decoder那个jar的流程,路径为`/opt/atlassian/confluence/confluence/WEB-INF/lib/atlassian-extras-decoder-api-3.4.1.jar`。市面上是把安装完路径的jar拿出来用注册机打pathc后换回去
-2. 我在市面上下载的破解包里有个类似jira的破解jar文件`atlassian-extras-3.2.jar`,网上搜到了另一种破解思路是这个文件扔进去前删掉`atlassian-extras*.jar`,这里找 https://mritd.me/ 漠然大佬帮我把注册机生成许可和打patch做成了不需要图形界面的cli工具用法是`docker exec confluence atlassianctl license -s <id>`即可获取许可证,官网申请的使用许可证不行,因为反编译的时候改了签名
+2. 我在市面上下载的破解包里有个类似jira的破解jar文件`atlassian-extras-3.2.jar`,网上搜到了另一种破解思路是这个文件扔进去前删掉`atlassian-extras*.jar`.
+3. 这里找 https://mritd.me/ 漠然大佬帮我把注册机生成许可和打patch做成了不需要图形界面的cli工具用法是自行看命令帮助`atlassianctl --help`,用cli打patch和获取注册码,官网申请的使用许可证不行,因为反编译的时候改了签名
 confluence的compose.yml如下
 ```yaml
 version: '3.7'
