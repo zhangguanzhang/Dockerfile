@@ -21,3 +21,4 @@ function getInfo(){
         sed -r 's#<a.+?href="([^"]+).+?...</a>#https://www.youtube.com\1#;s#<br />#\n#g'
 }
 ```
+https://www.cnblogs.com/wpjamer/p/7392592.html
