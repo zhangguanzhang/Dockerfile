@@ -12,7 +12,7 @@ RUN set -x \
     && chmod -R 700            "${JIRA_HOME}" \
     && chown -R daemon:daemon  "${JIRA_HOME}" \
     && curl -Ls                "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-${JIRA_TYPE}-${JIRA_VERSION}.tar.gz" | tar -xz --directory "${JIRA_INSTALL}" --strip-components=1 --no-same-owner \
-    && curl -Ls                "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_connector}.tar.gz" | tar -xz --directory "${JIRA_INSTALL}/lib" --strip-components=1 --no-same-owner "mysql-connector-java-${MYSQL_connector}/mysql-connector-java-${MYSQL_connector}-bin.jar" \
+    && curl -Ls                "https://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-${MYSQL_connector}.tar.gz" | tar -xz --directory "${JIRA_INSTALL}/lib" --strip-components=1 --no-same-owner "mysql-connector-java-${MYSQL_connector}/mysql-connector-java-${MYSQL_connector}-bin.jar" \
     && rm -f                   "${JIRA_INSTALL}/lib/postgresql-9.1-903.jdbc4-atlassian-hosted.jar" \
     && curl -Ls                "https://jdbc.postgresql.org/download/postgresql-${PG_JDBC}.jar" -o "${JIRA_INSTALL}/lib/postgresql-${PG_JDBC}.jar" \
     && chmod -R 700            "${JIRA_INSTALL}/conf" "${JIRA_INSTALL}/logs" "${JIRA_INSTALL}/temp" "${JIRA_INSTALL}/work" \
