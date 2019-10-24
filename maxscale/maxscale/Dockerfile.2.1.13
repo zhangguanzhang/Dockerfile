@@ -1,0 +1,18 @@
+FROM ubuntu:16.04
+# https://dlm.mariadb.com/browse/mariadbmaxscale/
+RUN apt-get -y update && \
+    apt-get -y install gnupg2 ca-certificates curl libcurl3 && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "0x135659e928c12247" && \
+    curl -LO https://dlm.mariadb.com/257027/MaxScale/2.1.13-debug/ubuntu/dists/xenial/main/binary-amd64/maxscale-devel-2.1.13-1.ubuntu.xenial.x86_64.deb && \
+    curl -LO https://dlm.mariadb.com/257026/MaxScale/2.1.13-debug/ubuntu/dists/xenial/main/binary-amd64/maxscale-2.1.13-1.ubuntu.xenial.x86_64.deb && \
+    dpkg -i maxscale-* && \
+    rm -f maxscale-*  && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY maxscale.cnf /etc/
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/docker-entrypoint.sh && \
+    ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh # backwards compat
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["maxscale", "-d", "-U", "maxscale", "-l", "stdout"]

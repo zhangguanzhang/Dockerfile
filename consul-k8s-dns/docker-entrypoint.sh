@@ -89,8 +89,10 @@ if [ "$1" = 'consul' -a -z "${CONSUL_DISABLE_PERM_MGMT+x}" ]; then
     if [ "$(stat -c %u "$CONSUL_DATA_DIR")" != "$(id -u consul)" ]; then
         chown consul:consul "$CONSUL_DATA_DIR"
     fi
-    if [ "$(stat -c %u "$CONSUL_CONFIG_DIR")" != "$(id -u consul)" ]; then
-        chown consul:consul "$CONSUL_CONFIG_DIR"
+    if [ -n "$CONFIG_OWNER" ];then
+        if [ "$(stat -c %u "$CONSUL_CONFIG_DIR")" != "$(id -u consul)" ]; then
+            chown consul:consul "$CONSUL_CONFIG_DIR"
+        fi
     fi
 
     # If requested, set the capability to bind to privileged ports before

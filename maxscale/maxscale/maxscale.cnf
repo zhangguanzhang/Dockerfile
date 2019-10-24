@@ -1,0 +1,16 @@
+# MaxScale documentation on GitHub:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Documentation-Contents.md
+
+# Complete list of configuration options:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Getting-Started/Configuration-Guide.md
+
+# This service enables the use of the MaxAdmin interface
+# MaxScale administration guide:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Reference/MaxAdmin.md
+# Global parameters
+
+[maxscale]
+threads=auto
+# this enables external access to the REST API outside of localhost
+# please review / modify for any public / non development environments
+admin_host=0.0.0.0

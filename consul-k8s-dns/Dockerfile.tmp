@@ -1,0 +1,9 @@
+FROM consul:1.6.1
+LABEL maintainer="zhangguanzhang <zhangguanzhang@qq.com>"
+
+ARG TZ=Asia/Shanghai
+
+RUN set -eux && \
+    ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime && \
+    echo ${TZ} > /etc/timezone
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
