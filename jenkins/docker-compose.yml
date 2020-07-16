@@ -1,0 +1,18 @@
+version: '2.3'
+services:
+  jenkins:
+    #image: jenkins/jenkins:lts
+    image: zhangganzhang/jenkins:lts-docker
+    container_name: jenkins
+    volumes:
+      - ./data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    ports:
+      - 50000:50000
+      - 8081:8080
+    networks:
+      - jenkins
+networks:
+  jenkins:
+    external: false

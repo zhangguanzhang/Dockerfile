@@ -1,0 +1,5 @@
+FROM jenkins/jenkins:lts
+USER root
+RUN groupadd -g 995 docker && \
+    usermod -a -G docker jenkins
+USER jenkins
