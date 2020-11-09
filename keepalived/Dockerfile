@@ -1,11 +1,11 @@
-FROM alpine:3.7
+FROM alpine:3.12.1
 
-COPY keepalived.sh  /usr/bin/keepalived.sh
+COPY docker-entrypoint.sh /entrypoint.sh
 
-RUN apk --update -t --no-cache add keepalived iproute2 grep bash tcpdump sed  && \
-    chmod +x /usr/bin/keepalived.sh && \
-    rm -f /var/cache/apk/* /tmp/*
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache keepalived curl bash iproute2 grep sed tcpdump && \
+    chmod a+x /entrypoint.sh && \
+    mkdir -p /etc/keepalived
 
-COPY keepalived.conf /etc/keepalived/keepalived.conf
-
-ENTRYPOINT ["/usr/bin/keepalived.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
