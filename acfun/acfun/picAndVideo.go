@@ -19,7 +19,8 @@ const (
 	OSSTokenURL         = domain + "/rest/pc-direct/upload/ali/getToken"
 	UploadFinishURL     = domain + "/rest/pc-direct/upload/ali/uploadFinish"
 	CreateVideoURL      = domain + "/rest/pc-direct/contribute/createVideo"
-	SubmitVideosURL     = domain + "/contribute/video"
+	// SubmitVideosURL     = domain + "/contribute/video"
+	SubmitVideosURL     = "https://member.acfun.cn/video/api/createDouga"
 	CertifiedCookieName = "stochastic" //投稿的certified值来源于cookies里
 	VideoPendingURL     = domain + "/rest/pc-direct/contribute/getVideoPendings"
 )

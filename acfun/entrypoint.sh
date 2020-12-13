@@ -3,20 +3,7 @@ set -e
 [[ "${DEBUG}" == "true" ]] && set -x
 cd /root/data
 
-# $1 url [$2 quality]
-down(){
-    local quality='bestvideo'
-    local url=$1
-    if [ -n "$2" ];then
-        quality=$2
-    fi
-    youtube-dl --write-thumbnail \
-    --embed-sub \
-    --write-sub \
-    -f "$quality+bestaudio[ext=m4a]/$quality+bestaudio/best" --merge-output-format mp4 -o "a${1#*=}.%(ext)s" $url
-}
-
-
+. /etc/profile.d/down.sh
 
 upload(){
     local url=$1
@@ -54,5 +41,5 @@ elif [ "$#" -eq 1 ];then #搬运单个大视频需要选择质量
     set -e
     down $1 $quality
 else
-  sh
+    bash -l
 fi

@@ -1,6 +1,6 @@
 module acfun
 
-go 1.13
+go 1.15
 
 require (
 	github.com/aliyun/aliyun-oss-go-sdk v2.0.3+incompatible

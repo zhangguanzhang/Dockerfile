@@ -1,0 +1,5 @@
+#!/bin/bash
+# hooks/build
+# https://docs.docker.com/docker-cloud/builds/advanced/
+
+docker build -f Dockerfile.tmp -t $IMAGE_NAME .

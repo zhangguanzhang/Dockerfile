@@ -8,7 +8,9 @@ RUN set -xe \
                           python3 \
                           jq \
     && python3 -m ensurepip \
-    && python3 -m pip install youtube-dl
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/bin/youtube-dl \
+    && chmod a+x /usr/bin/youtube-dl
 
 WORKDIR /data
 
