@@ -13,6 +13,6 @@ COPY --from=builder /root/acfun /usr/local/bin
 COPY entrypoint.sh /
 COPY down.sh /etc/profile.d/down.sh
 RUN apk add bash libwebp-tools && \
-    rm -f /var/cache/apk/* /tmp/* && \
+    rm -rf /var/cache/apk/* /tmp/* && \
     chmod a+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
