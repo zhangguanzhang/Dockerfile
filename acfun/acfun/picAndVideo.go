@@ -17,12 +17,14 @@ const (
 	CoverTokenURL       = domain + "/v2/user/content/upToken"
 	CoverUploadURL      = "https://upload.qiniup.com/"
 	OSSTokenURL         = domain + "/rest/pc-direct/upload/ali/getToken"
-	UploadFinishURL     = domain + "/rest/pc-direct/upload/ali/uploadFinish"
-	CreateVideoURL      = domain + "/rest/pc-direct/contribute/createVideo"
+	//UploadFinishURL     = domain + "/rest/pc-direct/upload/ali/uploadFinish"
+	UploadFinishURL     = "https://member.acfun.cn/video/api/uploadFinish"
+	//CreateVideoURL      = domain + "/rest/pc-direct/contribute/createVideo"
+	CreateVideoURL      = "https://member.acfun.cn/video/api/createVideo"
 	// SubmitVideosURL     = domain + "/contribute/video"
 	SubmitVideosURL     = "https://member.acfun.cn/video/api/createDouga"
 	CertifiedCookieName = "stochastic" //投稿的certified值来源于cookies里
-	VideoPendingURL     = domain + "/rest/pc-direct/contribute/getVideoPendings"
+	VideoPendingURL     = "https://member.acfun.cn/video/api/createVideo"
 )
 
 //图片token
@@ -289,6 +291,7 @@ func (ac *Acfun) getVideoID(uploadInfo *uploadInfo) (int64, error) {
 	resp, err = ac.R().SetFormData(map[string]string{
 		"videoKey": uploadInfo.VideoID,
 		"fileName": uploadInfo.localFIlename,
+		"vodType": "ksCloud",
 	}).SetHeader("Sec-Fetch-Site", "same-origin").Post(CreateVideoURL)
 	if err != nil {
 		return 0, err
@@ -358,6 +361,7 @@ func (ac *Acfun) SubmitVideos(submitInfo *SubmitVedioInfo) error {
 			if err != nil {
 				return fmt.Errorf("post cover %s", err)
 			}
+			log.Infof("pic url: %s", picUrl)
 		}
 	}
 
