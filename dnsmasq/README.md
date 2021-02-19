@@ -18,3 +18,6 @@ server={{ host }}#{{ coredns_port }}
         - -d
         - --conf-file=/etc/keepalived/dnsmasq.conf
 ```
+
+相关链接：
+- http://www.thekelleys.org.uk/dnsmasq/
