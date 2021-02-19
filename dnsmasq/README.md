@@ -10,3 +10,11 @@ server={{ host }}#{{ coredns_port }}
 {% endfor %}
 #log-queries
 ```
+
+```yaml
+...
+        command:
+        - dnsmasq
+        - -d
+        - --conf-file=/etc/keepalived/dnsmasq.conf
+```
