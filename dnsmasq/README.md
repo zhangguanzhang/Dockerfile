@@ -16,7 +16,13 @@ server={{ host }}#{{ coredns_port }}
         command:
         - dnsmasq
         - -d
-        - --conf-file=/etc/keepalived/dnsmasq.conf
+        - --conf-file=/etc/dnsmasq/dnsmasq.conf
+```
+
+### 镜像
+
+```
+registry.aliyuncs.com/zhangguanzhang/dnsmasq:2.83
 ```
 
 相关链接：
