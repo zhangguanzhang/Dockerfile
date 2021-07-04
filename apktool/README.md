@@ -41,7 +41,7 @@ keytool -genkey -alias aeo_android.keystore -keyalg RSA -validity 20000 -keystor
 
 jarsigner -verbose -keystore aeo_android.keystore -signedjar new_xx.apk xx.apk aeo_android.keystore
 
-#
+# 来源 https://github.com/as0ler/Android-Tools/tree/master/Autosign/Auto-Sign
 java -jar signapk.jar testkey.x509.pem testkey.pk8 xx.apk new_xx.apk
 ```
 
