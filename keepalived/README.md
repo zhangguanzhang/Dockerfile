@@ -1,6 +1,20 @@
+## 版本
+
+版本:
+- `v2.0.20`
+- `v2.2.0`
+
+拉取:
+
+```
+ docker pull zhangguanzhang/keepalived:v2.2.0
+ docker pull registry.aliyuncs.com/zhangguanzhang/keepalived:v2.2.0
+```
+
 ## keepalived
 
 前台主要是运行的几个选项，exec 让 keepalived 主进程能够感知到信号，--net=host 运行，lvs 的话可以下面类似
+
 
 ```yaml
 ...
