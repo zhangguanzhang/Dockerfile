@@ -13,6 +13,46 @@
 
 ## keepalived
 
+### ipvs svc 的参考
+
+```yaml
+version: '3.5'
+services:
+  keepalived: 
+    image: 'registry.aliyuncs.com/zhangguanzhang/keepalived:v2.2.0'
+    hostname: 'keepalived-ipvs'
+    restart: unless-stopped
+    container_name: "keepalived-ipvs"
+    labels: 
+      - app=keepalived
+    network_mode: host
+    privileged: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /lib/modules:/lib/modules
+      - /run/xtables.lock:/run/xtables.lock
+      - ./conf.d/:/etc/keepalived/conf.d/
+      - ./keepalived.conf:/etc/keepalived/keepalived.conf
+      - ./always-initsh.d:/always-initsh.d
+    command: 
+      - --dont-fork
+      - --log-console
+      - --log-detail
+      - --use-file=/etc/keepalived/keepalived.conf
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 20m
+```
+
+
+### 我博客的 dns 方案的话
+
 前台主要是运行的几个选项，exec 让 keepalived 主进程能够感知到信号，--net=host 运行，lvs 的话可以下面类似
 
 
