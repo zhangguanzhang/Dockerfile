@@ -1,5 +1,5 @@
 FROM ubuntu:20.04 as build
-ARG VERSION=V0.13.03
+ARG VERSION=V0.13.05
 RUN  if [ -f /etc/apt/sources.list ];then sed -ri 's/(deb|security|archive).(debian.org|ubuntu.com)/mirrors.aliyun.com/g' /etc/apt/sources.list; fi && \
     apt-get update && apt-get install -y make gcc git
 
