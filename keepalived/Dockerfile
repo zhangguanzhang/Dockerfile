@@ -1,4 +1,5 @@
-FROM alpine:3.13.6
+ARG ALPINE_VERSION 3.14.3
+FROM alpine:${ALPINE_VERSION}
 
 LABEL MAINTAINER="zhangguanzhang zhangguanzhang@qq.com" \
     URL="https://github.com/zhangguanzhang/Dockerfile/tree/master/keepalived"
