@@ -1,16 +1,18 @@
-version: '2.3'
+version: '3'
 services:
   jenkins:
-    #image: jenkins/jenkins:lts
-    image: zhangguanzhang/jenkins:lts-docker
+    image: 'registry.aliyuncs.com/zhangguanzhang/jenkins:lts-docker'
     container_name: jenkins
+    restart: unless-stopped 
+    ports: 
+      - '8080:8080'
+      - '50000:50000'
+    environment:
+      - TZ=Asia/Shanghai
     volumes:
-      - ./data:/var/jenkins_home
+      - './data:/var/jenkins_home'
       - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-    ports:
-      - 50000:50000
-      - 8081:8080
+      - '/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime'
     networks:
       - jenkins
 networks:
