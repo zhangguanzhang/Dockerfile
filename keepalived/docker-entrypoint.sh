@@ -9,6 +9,7 @@ set -e
 : ${Always_RUN_DIR:=/always-initsh.d/}
 : ${DT:=date  +'%Y-%m-%dT%H:%M:%S%z'}
 
+export MAIN_CONF CONF_DIR
 
 # logging functions
 keepalived_log() {
