@@ -11,7 +11,10 @@ fi
 
 
 count=0
-if [ -d '/tmp/blog' ];then 
+if [ -d '/tmp/blog' ];then
+    if [ -f /tmp/blog/env ];then
+        source /tmp/blog/env
+    fi
     count=`ls /tmp/blog | wc -l`
     if [ "$count" -gt 0 ];then
         cp -a /tmp/blog/* /root/blog/

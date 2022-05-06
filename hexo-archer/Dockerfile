@@ -7,7 +7,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     apk add git && \
     npm install -g hexo-cli && \
     hexo init && \
-    npm install hexo-deployer-git --save && \
+    npm install hexo-deployer-git hexo-algolia --save && \
     npm install && \
     npm i hexo-generator-json-content --save && \
     npm i --save hexo-wordcount hexo-generator-feed && \
