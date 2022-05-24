@@ -13,7 +13,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
        elif [ "${arch}" = "aarch64" ]; then \
             arch="arm"; \
        fi \
-    && url=$( curl -s https://api.github.com/repos/wangyu-/udp2raw-tunnel/releases/${VERSION} | jq -r '.assets[]| select(.name=="'${FileName}'") | .browser_download_url' ) \
+    && url=$( curl -sL https://api.github.com/repos/wangyu-/udp2raw-tunnel/releases/${VERSION} | jq -r '.assets[]| select(.name=="'${FileName}'") | .browser_download_url' ) \
     && wget $url -O $FileName \
     && tar zxvf $FileName -C /tmp/ \
     && rm -f $FileName \
