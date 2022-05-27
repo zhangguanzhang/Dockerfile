@@ -21,6 +21,15 @@ if [ -d '/tmp/blog' ];then
     fi
 fi
 
+# 修复 fatal: not a git repository (or any parent up to mount point /root/blog)
+if [ -d /root/blog/.deploy_git/ ];then
+    if [ ! -d /root/blog/.deploy_git/.git/ ];then
+        cd /root/blog/.deploy_git/
+        git init
+        cd -
+    fi
+fi
+
 hexo d -g
 
 if [ "$count" -gt 0 ];then

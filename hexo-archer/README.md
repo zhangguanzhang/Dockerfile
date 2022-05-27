@@ -40,3 +40,24 @@ docker run --rm -ti \
     -v ~/blog/.deploy_git:/root/blog/.deploy_git \
     zhangguanzhang/hexo-archer
 ```
+
+最后建议在每次发布博客之前用 shell 脚本检查你的关键字，防止某些关键字带上去。
+
+```bash
+function hexo () 
+{ 
+    if grep --color=auto -Eq 'xxx|xxxx|xxxxx|xxxxx' /root/blog/data/source/_posts/*; then
+        echo 'keyword matched, will not run';
+        return;
+    fi;
+    docker run --rm -ti -v ~/blog/data:/tmp/blog -v ~/.ssh:/root/.ssh/ -v ~/.gitconfig:/root/.gitconfig -v ~/blog/public:/root/blog/public -v ~/blog/.deploy_git:/root/blog/.deploy_git zhangguanzhang/hexo-archer
+}
+```
+
+## cdn.jsdelivr.net/npm 问题
+
+在 `~/blog/data/env` 里追加下面内容
+
+```
+find /root/blog/themes/archer/layout/ -type f -name '*.ejs' -exec sed -ri 's#cdn.jsdelivr.net/npm#unpkg.zhimg.com#g' {} \;
+```
