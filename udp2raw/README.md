@@ -1,7 +1,20 @@
+## 关于
+
 https://github.com/wangyu-/udp2raw-tunnel/blob/master/doc/README.zh-cn.md#%E8%BF%90%E8%A1%8C
 
-```shell
+## 构建
+
+```
+docker buildx build --platform linux/amd64,linux/arm64 \
+    --push --progress plain \
+    -t zhangguanzhang/udp2raw:20230206.0 --build-arg VERSION=20230206.0 .
+```
+
+## 运行
+
 在server端运行:
+
+```shell
 docker run \
     -d --name udp2raw  \
     --net host \
@@ -13,8 +26,11 @@ docker run \
     -k passwd \
     --raw-mode faketcp  \
     --cipher-mode xor  -a
+```
 
 在client端运行:
+
+```
 docker run --net host \
     -d --name udp2raw  \
     --cap-add NET_RAW \
