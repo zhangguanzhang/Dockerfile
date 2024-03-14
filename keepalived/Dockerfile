@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3.16
+ARG ALPINE_VERSION=3.18
 FROM alpine:${ALPINE_VERSION}
 
 LABEL MAINTAINER="zhangguanzhang zhangguanzhang@qq.com" \

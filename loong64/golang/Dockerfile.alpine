@@ -1,0 +1,49 @@
+ARG IMG=alpine:3.19
+FROM ${IMG} AS build
+
+ENV PATH /usr/local/go/bin:$PATH
+ENV GOLANG_VERSION 1.21.5
+#ENV GOLANG_VERSION 1.20.12
+
+RUN set -eux; \
+    apk add --no-cache --virtual .fetch-deps \
+        ca-certificates \
+        tar \
+    ; \
+    # http://www.loongnix.cn/zh/toolchain/Golang/
+    wget http://ftp.loongnix.cn/toolchain/golang/go-${GOLANG_VERSION%.*}/abi1.0/go${GOLANG_VERSION}.linux-amd64.tar.gz; \
+    tar zxf go*.linux-amd64.tar.gz -C /usr/local/; \
+    rm -f go*.linux-amd64.tar.gz; \
+    apk del --no-network .fetch-deps; \
+    go version
+
+FROM alpine:3.19
+
+RUN set -eux; \
+    # sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories; \
+    # apk update; \
+    apk add --no-cache \
+        ca-certificates \
+        # file \
+        # make \
+        # git \
+    ;
+ENV GOLANG_VERSION 1.21.5
+
+# don't auto-upgrade the gotoolchain
+# https://github.com/docker-library/golang/issues/472
+ENV GOTOOLCHAIN=local
+
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+COPY --from=build --link /usr/local/go/ /usr/local/go/
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH"
+WORKDIR $GOPATH
+
+ENV GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,https://goproxy.io,direct
+
+RUN set -eux; \
+    mkdir -p ~/.ssh/; \
+    chmod 0700 ~/.ssh/; \
+    touch ~/.ssh/known_hosts ~/.ssh/authorized_keys; \
+    chmod 0600 ~/.ssh/known_hosts ~/.ssh/authorized_keys; 
