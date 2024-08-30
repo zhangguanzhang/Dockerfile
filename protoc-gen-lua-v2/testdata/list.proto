@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package models;
+
+message Info {
+    optional int32 Tag = 1;
+}
+
+message List {
+    repeated Info Infos = 1;
+}
