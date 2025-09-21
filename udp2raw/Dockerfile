@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.18
 
 LABEL maintainer="zhangguanzhang <zhangguanzhang@qq.com>"
 
@@ -9,7 +9,14 @@ ARG AES_EN=true
 
 RUN set -eux; \
     sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories; \
-    apk add curl iptables tcpdump jq; \
+    apk add curl \
+          bash \
+          iptables \
+          tcpdump \
+          jq \
+          --no-cache; \
+    curl -L https://raw.githubusercontent.com/kubernetes-sigs/iptables-wrappers/v2/iptables-wrapper-installer.sh > /iptables-wrapper-installer.sh; \
+    bash /iptables-wrapper-installer.sh --no-sanity-check; \
     arch=$(arch); \
     if [ "${arch}" = "x86_64" ]; then \
             arch="amd64"; \

@@ -19,7 +19,7 @@ RUN if [ -f /etc/apt/sources.list ];then sed -ri 's/(ports|deb|security|archive)
     rm -rf /var/cache/apk/* /tmp/* /var/cache/apt/* /var/lib/apt/lists/*; 
 
 ENV PATH /usr/local/go/bin:$PATH
-ENV GOLANG_VERSION 1.21.5
+ENV GOLANG_VERSION 1.23.12
 #ENV GOLANG_VERSION 1.20.12
 
 RUN set -eux; \
